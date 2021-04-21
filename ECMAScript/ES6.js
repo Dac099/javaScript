@@ -1,12 +1,4 @@
-// Parametros por defecto
-function newFunction (name, age, country){
-    var name = name || "David";
-    var age = age || 21;
-    var country = country || "MX";
-    console.log(name, age, country);
-}
-
-// ES6
+// ES6 parametros por defecto
 function newFunction2 (name = "David", age = 32, country = "MX"){
     console.log(name, age, country);
 }
@@ -69,10 +61,9 @@ const helloPromise = () => {
     })
 }
 
-helloPromise();
-    // .then(response => console.log(response))
-    // .then(() => console.log("Hola"))
-    // .catch(error => console.log(error));
+helloPromise()
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
 
 
 // Clases, Modulos y Generadores

@@ -27,7 +27,7 @@ function fetchData(url_api,callback){
      * "status" retorna el estado del request:
      *  [200] Todo salio bien "OK"
      *  [403] "Forbidden"
-     *  [404] "Not Found"]
+     *  [404] "Not Found"] 
      *  Tiene varias respuestas...
      */
     xhttp.onreadystatechange = function(event){
