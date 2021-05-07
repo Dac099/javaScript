@@ -12,8 +12,5 @@
     "npm"
   ],
   "author": "David Ceja Zapata <davidcejazapata@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "snowpack": "^3.3.7"
-  }
+  "license": "MIT"
 }
