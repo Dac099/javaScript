@@ -1,6 +1,7 @@
 const url = "https://platzi-avo.vercel.app/api/avo";
 const base_url = "https://platzi-avo.vercel.app/";
 const mount = document.querySelector('#main-container');
+
 mount.addEventListener('click',function alerta(event){
     if (event.target.nodeName === "H2"){
         alert('Gracias por la compra');
