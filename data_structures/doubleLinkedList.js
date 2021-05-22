@@ -30,6 +30,8 @@ class MyDoublyLinkedList{
     preApend(value){
         let newNode = new Node(value);
         newNode.next = this.head;
+        this.head.prev = newNode;
+        newNode.prev = null;
         this.head = newNode;
         this.lenght++;
 
@@ -37,28 +39,31 @@ class MyDoublyLinkedList{
     }
 
     getTheIndex(index){
-        let counter = 0;
+        let counter = 0;    
         let currentNode = this.head;
         while(counter != index){
             currentNode = currentNode.next;
-            counter
+            counter++;
         }
-        return currentNode;
+        return currentNode; 
     }
 
-    insert(index, value){
-        if(index >= this.lenght){
-            const newNode = new Node(value);
-            const firstPointer = this.getTheIndex(index - 1);
-            const holdingPointer = firstPointer.next;
-            newNode.next = holdingPointer;
-            firstPointer.next = newNode;
-            this.lenght++;
-
-            return this;
+    insert(index, value) {
+        if (index >= this.length) {
+          return this.append(value);
         }
-        return undefined;
-    }
+    
+        const newNode = new Node(value);
+        const firstPointer = this.getTheIndex(index - 1);
+        const holdingPointer = firstPointer.next;
+        firstPointer.next = newNode;
+        holdingPointer.prev = newNode;
+        newNode.next = holdingPointer;
+        newNode.prev = firstPointer;
+        this.lenght++;
+    
+        return this;
+      }
 }
 
 let myDoublyList = new MyDoublyLinkedList(1);
