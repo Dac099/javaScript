@@ -109,20 +109,58 @@ class BinarySearchTree{
             return "El valor no se encuentra dentro del arbol";
         }else{
             let nodeToDelete = this.search(value);
+            
             //Si es un nodo hoja
             if (nodeToDelete.left === null && nodeToDelete.right === null){
                 let holdingNode = nodeToDelete.father;
                 //Verificar si es un nodo derecho o izquierdo
                 if(holdingNode.left === nodeToDelete){
                     holdingNode.left = null;
-                    delete nodeToDelete;
+                    return this;
                 }else{
                     holdingNode.right = null;
-                    delete nodeToDelete;
+                    return this;
                 }
             }
+
             //Si es un nodo con un hijo
+            if(nodeToDelete.left === null){
+                let holdingNode = nodeToDelete.father;
+                let childNode = nodeToDelete.right;
+                childNode.father = holdingNode;
+                if(nodeToDelete === holdingNode.left){
+                    holdingNode.left = childNode;
+                    nodeToDelete.right = null;
+                    nodeToDelete.father = null;
+                    return this;
+                }else{
+                    holdingNode.right = childNode;
+                    nodeToDelete.right = null;
+                    nodeToDelete.father = null;
+                    return this;
+                }
+            }
+            if(nodeToDelete.right === null){
+                let holdingNode = nodeToDelete.father;
+                let childNode = nodeToDelete.left;
+                childNode.father = holdingNode;
+                if(nodeToDelete === holdingNode.left){
+                    holdingNode.left = childNode;
+                    nodeToDelete.father = null;
+                    nodeToDelete.left = null;
+                    return this;
+                }else{
+                    holdingNode.right = childNode;
+                    nodeToDelete.left = null;
+                    nodeToDelete.father = null;
+                    return this;
+                }
+            }
+
             //Si es un nodo con dos hijos
+            if(nodeToDelete.left != null && nodeToDelete.right != null){
+
+            }
         }
     }
 }
