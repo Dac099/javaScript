@@ -2,6 +2,7 @@ class Node{
     constructor(value){
         this.left =  null;
         this.right = null;
+        this.father = null;
         this.value = value;
     }
 }
@@ -34,6 +35,7 @@ class BinarySearchTree{
                     //Si el valor es menor verificamos si el nodo izquierdo es null
                     //Si es null el nodo va apuntar al nodo que instanciamos
                     if(currentNode.left === null){
+                        newNode.father = currentNode;
                         currentNode.left = newNode;
                         return this;
                     }else{
@@ -47,6 +49,7 @@ class BinarySearchTree{
                     //Verificamos si el nodo derecho es null
                     //Si es null el nodo va apuntar al nodo que instanciamos
                     if(currentNode.right === null){
+                        newNode.father = currentNode;
                         currentNode.right = newNode;
                         return this;
                     }else{
@@ -101,11 +104,25 @@ class BinarySearchTree{
         }
     }
 
-    delete(value){
+    deleteNode(value){
         if(this.search(value) === null){
             return "El valor no se encuentra dentro del arbol";
         }else{
-            
+            let nodeToDelete = this.search(value);
+            //Si es un nodo hoja
+            if (nodeToDelete.left === null && nodeToDelete.right === null){
+                let holdingNode = nodeToDelete.father;
+                //Verificar si es un nodo derecho o izquierdo
+                if(holdingNode.left === nodeToDelete){
+                    holdingNode.left = null;
+                    delete nodeToDelete;
+                }else{
+                    holdingNode.right = null;
+                    delete nodeToDelete;
+                }
+            }
+            //Si es un nodo con un hijo
+            //Si es un nodo con dos hijos
         }
     }
 }
