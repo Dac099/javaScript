@@ -11,5 +11,8 @@
     "ajax"
   ],
   "author": "David Ceja Zapata <davidcejazapata@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
 }
