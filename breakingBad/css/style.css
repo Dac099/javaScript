@@ -53,6 +53,14 @@ html {
   display: grid;
   -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
-  -ms-grid-rows: ;
-  grid-template-rows: ;
+  -ms-grid-rows: 3fr 2fr;
+  grid-template-rows: 3fr 2fr;
+}
+.card > *:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+}
+.card > *:nth-child(2) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
 }
