@@ -159,10 +159,51 @@ class BinarySearchTree{
 
             //Si es un nodo con dos hijos
             if(nodeToDelete.left != null && nodeToDelete.right != null){
-
+                //Buscamos el nodo con el menor valor del sub arbol derecho
+                let rightTree = nodeToDelete.right;
+                // Apuntamos al hijo iquierdo del sub arbol derecho del nodo a eliminar
+                let leftNode =  rightTree.left;
+                // En un ciclo verificamos si el nodo tiene hijo izquierdo hasta que ya no tenga hijo izquierdo
+                while(true){
+                    if(leftNode.left === null){
+                        // Si no tiene hijo izquierdo 
+                        // Su valor se le asigna al nodo al que se le estaba apuntando al principio
+                        nodeToDelete.value = leftNode.value;
+                        // Verificamos si tiene hijo derecho
+                        if(leftNode.right != null){
+                            //Si tiene hijo derecho 
+                            // Se crea un apuntador al nodo buscado
+                            // El padre del nodo, va apuntar al hijo del nodo 
+                            leftNode.father.left = leftNode.right;
+                            // En el nodo hijo, su padre va a ser el padre del nodo buscado 
+                            leftNode.right.father = leftNode.father;
+                        }
+                        // En el nodo buscado, va apuntar a null en hijos y padre
+                        leftNode.father = null;
+                        leftNode.right = null;
+                        leftNode.left = null;
+                        return this;
+                    }else{
+                        // Si tiene un hijo izquierdo apuntamos a ese nodo y se repite el ciclo
+                        leftNode = leftNode.left;
+                        return this;
+                    }
+                }
             }
         }
     }
 }
 
 let tree = new BinarySearchTree();
+
+tree.insert(17);
+tree.insert(6);
+tree.insert(20);
+tree.insert(2);
+tree.insert(8);
+tree.insert(19);
+tree.insert(26);
+tree.insert(7);
+tree.insert(21);
+tree.insert(27);
+tree.insert(24);
