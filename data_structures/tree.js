@@ -177,6 +177,8 @@ class BinarySearchTree{
                             leftNode.father.left = leftNode.right;
                             // En el nodo hijo, su padre va a ser el padre del nodo buscado 
                             leftNode.right.father = leftNode.father;
+                        }else{
+                            leftNode.father.left = null;
                         }
                         // En el nodo buscado, va apuntar a null en hijos y padre
                         leftNode.father = null;
@@ -196,14 +198,12 @@ class BinarySearchTree{
 
 let tree = new BinarySearchTree();
 
-tree.insert(17);
-tree.insert(6);
-tree.insert(20);
-tree.insert(2);
-tree.insert(8);
-tree.insert(19);
-tree.insert(26);
-tree.insert(7);
-tree.insert(21);
+tree.insert(4);
+tree.insert(-7);
+tree.insert(-9);
 tree.insert(27);
-tree.insert(24);
+tree.insert(22);
+tree.insert(12);
+tree.insert(49);
+tree.insert(42);
+tree.insert(100);
