@@ -23,7 +23,7 @@ class Producto {
     }
 
     set precio(nuevoPrecio){
-        this._precio = nuevoPrecio;
+      this._precio = nuevoPrecio;
     }
 
     toString(){
