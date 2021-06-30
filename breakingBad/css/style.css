@@ -21,6 +21,9 @@
 html {
   font-size: 62.5%;
 }
+body {
+  background-color: #333;
+}
 .header {
   max-width: 100vw;
   max-height: 90px;
@@ -54,9 +57,22 @@ html {
   padding: 10px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 2fr 1fr;
-  grid-template-rows: 2fr 1fr;
+  gap: 10px;
+  -ms-grid-rows: 1fr 10px 1fr;
+  grid-template-rows: 1fr 1fr;
   background-color: #29773e;
+  border-radius: 5px;
+}
+figure {
+  width: 85%;
+  height: 100%;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+figure img {
+  width: 280px;
+  height: 300px;
+  border-radius: 10px;
 }
 .button {
   width: 200px;
@@ -98,13 +114,17 @@ td {
 table {
   border-collapse: collapse;
   font-family: 'Crimson Text', serif;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+  color: #fff;
 }
 .card-info {
+  color: #042202;
   text-align: right;
   padding-left: 15px;
 }
 .card-description {
-  color: #000;
   font-weight: bold;
 }

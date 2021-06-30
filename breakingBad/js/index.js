@@ -45,7 +45,24 @@ function rowsMaker(info,description, head = false){
 }
 
 
-//Funcion que crea la tarjeta del personaje
+//Funcion que crea el sention con la imagen
+//Recibe como parametro la url de la imagen a insertar
+//El segundo parametro de la funcion es un elemento que representa una tabla de html
+//Retorna el elemento secction con la imagen y la tabla insertada
+function sectionCardMakers(imgUrl, tableCard){
+    let sectionContainer = document.createElement('section');
+    sectionContainer.classList.add('card');
+    let imgContainer = document.createElement('figure');
+    let image = document.createElement('img');
+    image.src = imgUrl;
+    imgContainer.append(image);
+    sectionContainer.append(imgContainer);
+    sectionContainer.append(tableCard);
+    return sectionContainer;
+}
+
+
+//Funcion que crea la tabla del personaje
 function tableMaker(name,nickName,status){
     //Se crea el contenedor y los elementos de la tabla
     let tableCard = document.createElement("table");
@@ -99,13 +116,15 @@ fetchData(url, Number)
 
     let control = 0;
 
-    let tableCard = document.createElement('table');
     button.addEventListener('click', () => {
-        console.log(characters[control].name);
-        
-        tableCard = tableMaker(characters[control].name,characters[control].nickname,characters[control].status);
-        control++;
-        button.insertAdjacentElement('afterend',tableCard);
+        if(control > characters.length){
+            alert("You got all characters");
+        }else{
+            let tableCard = tableMaker(characters[control].name,characters[control].nickname,characters[control].status);
+            let urlImage = characters[control].img;
+            control++;
+            button.insertAdjacentElement('afterend',sectionCardMakers(urlImage,tableCard));
+        }
     });
     
 })
