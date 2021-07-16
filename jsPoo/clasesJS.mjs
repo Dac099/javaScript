@@ -1,3 +1,22 @@
+class Comment{
+    constructor({
+        content,
+        studentName,
+        studentRole = "estudiantes",
+    }){
+        this.content = content;
+        this.studentName = studentName;
+        this.studentRole = studentRole;
+        this.likes = 0;
+    }
+
+    public(){
+        console.log(`${this.studentName} (${this.studentRole})`);
+        console.log(`Likes: ${this.likes}`);
+        console.log(`${this.content}`);
+    }
+}
+
 function videoPlay(id){
     const urlSecreta = "http://platziSecreto.com/" + id;
     console.log("Se esta reproduciendo el video");
@@ -8,7 +27,8 @@ function videoPause(id){
     console.log("El video se ha pausado"); 
 }
 
- export class PlatziClass{
+
+export class PlatziClass{
     constructor({
         name,
         videoID,
@@ -20,11 +40,12 @@ function videoPause(id){
     play(){
         videoPlay(this.videoID);
     }
-
+    
     pause(){
         videoPause(this.videoID);
     }
 }
+
 class Clase{
     constructor({
         name,
@@ -51,6 +72,8 @@ class Course{
         clases = [],
         duracion,
         nivel,
+        isFree = false,
+        lang = "Spanish",
     }){
         //Metodo privado por convencion
         this._name = name;
@@ -58,53 +81,20 @@ class Course{
         this.aportes = aportes;
         this.duracion = duracion;
         this.nivel = nivel;
+        this.isFree = isFree;
+        this.lang = lang;
     }
-
+    
     get name(){
         return this._name;
     }
-
+    
     set name(newName){
         this._name = newName;
     }
 }
 
-//Instancias de cursos
-const programacionBasica = new Course({
-    name : "Curso gratis de programacion basica",
-    clases : [],
-});
 
-const cursoDefinitivoHtmlCss = new Course({
-    name: "Curso definitivo de HTML y CSS",
-    clases: [],
-});
-
-const cursoPracticoHtmlCss = new Course({
-    name: "Curso Practico de HTML y CSS",
-    clases: [],
-});
-
-const pythonBasico = new Course({
-    name: "Curso Basico de Python",
-    clases: [],
-});
-
-const pythonIntermedio = new Course({
-    name: "Curso intermedio de Python",
-    clases: [],
-});
-
-const javaScriptBasico = new Course({
-    name: "Curso Basico De JavaScript",
-    clases: [],
-});
-
-const matematicasDiscretas = new Course({
-    name: "Curso de Matematicas Discretas",
-    clases: [],
-});
-//Prototipos con la sintaxis de clases
 class learningPath{
     constructor({
         name,
@@ -137,6 +127,133 @@ class learningPath{
         this.courses[this.courses.indexOf(courseName)] = newCourse;
     }
 }
+
+
+class Student{
+    constructor({
+        name, 
+        lastName, 
+        age, 
+        finishedCourses,
+        learningPath
+    }){
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+        this.finishedCourses = finishedCourses;
+        this.learningPath = learningPath;
+    }
+    publicComment(commentContent){
+        const comment = new Comment({
+            content: commentContent,
+            studentName: this.name,
+        });
+        comment.public();
+    }
+}
+
+
+class TeacherStudent extends Student{
+    constructor(props){
+        super(props);
+    }
+
+    approveCourse(newCourse){
+        this.finishedCourses.push(newCourse);
+    }
+
+    publicComment(commentContent){
+        const comment = new Comment({
+            content: commentContent,
+            studentName: this.name,
+            studentRole: "Teacher",
+        });
+        comment.public();
+    }
+}
+
+class FreeStudent extends Student{
+    constructor(props){
+        super(props)
+    }
+
+    approveCourse(newCourse){
+        if(newCourse.lang){
+            this.finishedCourses.push(newCourse);
+        }else{
+            console.warn(`Lo siento ${this.name} no puedes tomar este curso`);
+        }
+    }
+}
+
+
+class BasicStudent extends Student{
+    constructor(props){
+        super(props)
+    }
+
+    approveCourse(newCourse){
+        if(newCourse.isFree){
+            this.finishedCourses.push(newCourse);
+        }else{
+            console.warn(`Lo siento ${this.name} no puedes tomar cursos en ingles`);
+        }
+    }
+}
+
+
+class ExpertStudent extends Student{
+    constructor(props){
+        super(props)
+    }
+
+    approveCourse(newCourse){
+        this.finishedCourses.push(newCourse);
+    }
+}
+
+
+
+//Instancias de cursos
+const programacionBasica = new Course({
+    name : "Curso gratis de programacion basica",
+    clases : [],
+    isFree: true,
+});
+
+const cursoDefinitivoHtmlCss = new Course({
+    name: "Curso definitivo de HTML y CSS",
+    clases: [],
+});
+
+const cursoPracticoHtmlCss = new Course({
+    name: "Curso Practico de HTML y CSS",
+    clases: [],
+    lang: "English",
+});
+
+const pythonBasico = new Course({
+    name: "Curso Basico de Python",
+    clases: [],
+});
+
+const pythonIntermedio = new Course({
+    name: "Curso intermedio de Python",
+    clases: [],
+});
+
+const javaScriptBasico = new Course({
+    name: "Curso Basico De JavaScript",
+    clases: [],
+});
+
+const matematicasDiscretas = new Course({
+    name: "Curso de Matematicas Discretas",
+    clases: [],
+});
+
+
+//Prototipos con la sintaxis de clases
 let webDevelopment = new learningPath({
     name: "Escuela de desarrollo web",
     courses: [
@@ -169,26 +286,8 @@ let dataScience = new learningPath({
 
 });
 
-class Student1 {
-    constructor({
-        name, 
-        lastName, 
-        age, 
-        finishedCourses,
-        learningPath
-    }){
-        this.name = name;
-        this.lastName = lastName;
-        this.age = age;
-        this.finishedCourses = finishedCourses;
-        this.learningPath = learningPath;
-    }
-    finishCourse(finishCourse){
-        this.finishedCourses.push(finishCourse);
-    }
-}
 
-const miguelito = new Student1 ({
+const miguelito = new FreeStudent ({
     name: 'Miguel', 
     lastName: "Gracia", 
     age: 21, 
