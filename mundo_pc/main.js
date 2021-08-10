@@ -44,7 +44,7 @@ class Raton extends DispositivoEntrada{
     }
 
     toString(){
-        console.log(`Tipo de entrada: ${this.tipoEntrada}\nMarca: ${this.marca}\nid: ${this.idRaton}`);
+        console.log(`Raon: [Tipo de entrada: ${this.tipoEntrada} Marca: ${this.marca} id: ${this.idRaton}]`);
     }
 
 }
@@ -70,7 +70,7 @@ class Teclado extends DispositivoEntrada{
     }
 
     toString(){
-        console.log(`Tipo de entrada: ${this.tipoEntrada}\nMarca: ${this.marca}\nid: ${this.idTeclado}`);
+        console.log(`Teclado: [Tipo de entrada: ${this.tipoEntrada} Marca: ${this.marca} id: ${this.idTeclado}]`);
     }
 }
 
@@ -112,6 +112,75 @@ class Monitor{
     }
 
     toString(){
-        console.log(`id: ${this.idMonitor}\nMarca: ${this.marca}\nPulgadas: ${this.pulgadas}`);
+        console.log(`Monitor: [id: ${this.idMonitor} Marca: ${this.marca} Pulgadas: ${this.pulgadas}]`);
     }
 }
+
+class Computadora {
+    
+    static contadorComputadoras = 0
+    
+    constructor(idComputadora, modelo, monitor, teclado, raton){
+        this._idComputadora = idComputadora;
+        this._modelo = modelo;
+        this._monitor = monitor;
+        this._teclado = teclado;
+        this._raton = raton;
+
+        Computadora.contadorComputadoras++;
+    }
+
+    get idComputadora(){
+        return this._idComputadora;
+    }
+
+    set idComputadora(nuevoIdComputadora){
+        this._idComputadora = nuevoIdComputadora
+    }
+
+    get modelo(){
+        return this._modelo;
+    }
+
+    set modelo(nuevoModelo){
+        this._modelo = nuevoModelo;
+    }
+
+    get monitor(){
+        let monitor = this._monitor.toString();
+        return monitor;
+    }
+
+    set monitor(nuevoMonitor){
+        this._monitor = nuevoMonitor;
+    }
+
+    get teclado(){
+        let teclado = this._teclado.toString();
+        return teclado;
+    }
+
+    set teclado(nuevoTeclado){
+        this._teclado = nuevoTeclado;
+    }
+
+    get raton(){
+        let raton = this._raton.toString();
+        return raton;
+    }
+
+    set raton(nuevoRaton){
+        this._raton = nuevoRaton;
+    }
+
+    toString(){
+        return `${this.monitor}`;
+    }
+}
+
+let mouse = new Raton('Control','Logitech','G203');
+let keyboard = new Teclado('Tipeo', 'Ajazz', 'AK33');
+let monitor = new Monitor('GW2480','BenQ', 24);
+let pcerda = new Computadora('Armada','La diosa', monitor, keyboard, mouse);
+
+console.log(pcerda.toString());
