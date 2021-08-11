@@ -28,11 +28,11 @@ class Raton extends DispositivoEntrada{
 
     static contadorRatones = 0;
 
-    constructor(tipoEntrada, marca, idRaton){
-        super(tipoEntrada, marca);
-        this._idRaton = idRaton;
-
+    constructor(tipoEntrada, marca){
         Raton.contadorRatones++;
+
+        super(tipoEntrada, marca);
+        this._idRaton = Raton.contadorRatones;
     }
 
     get idRaton(){
@@ -44,7 +44,7 @@ class Raton extends DispositivoEntrada{
     }
 
     toString(){
-        console.log(`Raon: [Tipo de entrada: ${this.tipoEntrada} Marca: ${this.marca} id: ${this.idRaton}]`);
+        return `Raton: [Tipo de entrada: ${this.tipoEntrada} Marca: ${this.marca} id: ${this.idRaton}]`;
     }
 
 }
@@ -54,11 +54,11 @@ class Teclado extends DispositivoEntrada{
     
     static contadorTeclados = 0
 
-    constructor(tipoEntrada, marca, idTeclado){
-        super(tipoEntrada, marca);
-        this._idTeclado = idTeclado;
-
+    constructor(tipoEntrada, marca){
         Teclado.contadorTeclados++;
+
+        super(tipoEntrada, marca);
+        this._idTeclado = Teclado.contadorTeclados;
     }
 
     get idTeclado(){
@@ -70,7 +70,7 @@ class Teclado extends DispositivoEntrada{
     }
 
     toString(){
-        console.log(`Teclado: [Tipo de entrada: ${this.tipoEntrada} Marca: ${this.marca} id: ${this.idTeclado}]`);
+        return `Teclado: [Tipo de entrada: ${this.tipoEntrada} Marca: ${this.marca} id: ${this.idTeclado}]`;
     }
 }
 
@@ -79,12 +79,12 @@ class Monitor{
 
     static contadorMonitores = 0;
 
-    constructor(idMonitor, marca, pulgadas){
-        this._idMonitor = idMonitor;
+    constructor(marca, pulgadas){
+        Monitor.contadorMonitores++;
+
+        this._idMonitor = Monitor.contadorMonitores;
         this._marca = marca;
         this._pulgadas = pulgadas;
-
-        Monitor.contadorMonitores++;
     }
 
     get idMonitor(){
@@ -100,7 +100,7 @@ class Monitor{
     }
 
     set marca(nuevaMarca){
-        this._marca = nuevoMarca
+        this._marca = nuevaMarca
     }
 
     get pulgadas(){
@@ -112,7 +112,7 @@ class Monitor{
     }
 
     toString(){
-        console.log(`Monitor: [id: ${this.idMonitor} Marca: ${this.marca} Pulgadas: ${this.pulgadas}]`);
+        return `Monitor: [id: ${this.idMonitor} Marca: ${this.marca} Pulgadas: ${this.pulgadas}]`;
     }
 }
 
@@ -120,14 +120,14 @@ class Computadora {
     
     static contadorComputadoras = 0
     
-    constructor(idComputadora, modelo, monitor, teclado, raton){
-        this._idComputadora = idComputadora;
+    constructor(modelo, monitor, teclado, raton){
+        Computadora.contadorComputadoras++;
+
+        this._idComputadora = Computadora.contadorComputadoras;
         this._modelo = modelo;
         this._monitor = monitor;
         this._teclado = teclado;
         this._raton = raton;
-
-        Computadora.contadorComputadoras++;
     }
 
     get idComputadora(){
@@ -147,8 +147,7 @@ class Computadora {
     }
 
     get monitor(){
-        let monitor = this._monitor.toString();
-        return monitor;
+        return this._monitor;
     }
 
     set monitor(nuevoMonitor){
@@ -156,8 +155,7 @@ class Computadora {
     }
 
     get teclado(){
-        let teclado = this._teclado.toString();
-        return teclado;
+        return this._teclado;
     }
 
     set teclado(nuevoTeclado){
@@ -165,8 +163,7 @@ class Computadora {
     }
 
     get raton(){
-        let raton = this._raton.toString();
-        return raton;
+        return this._raton;
     }
 
     set raton(nuevoRaton){
@@ -174,13 +171,13 @@ class Computadora {
     }
 
     toString(){
-        return `${this.monitor}`;
+        return `Computadora ${this._idComputadora}:\n${this.modelo}\n${this.monitor}\n${this.raton}\n${this.teclado}`;
     }
 }
 
 let mouse = new Raton('Control','Logitech','G203');
 let keyboard = new Teclado('Tipeo', 'Ajazz', 'AK33');
 let monitor = new Monitor('GW2480','BenQ', 24);
-let pcerda = new Computadora('Armada','La diosa', monitor, keyboard, mouse);
+let pcerda = new Computadora('Armada', monitor, keyboard, mouse);
 
-console.log(pcerda.toString());
+console.log(pcerda.toString()); 
