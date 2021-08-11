@@ -44,7 +44,7 @@ class Raton extends DispositivoEntrada{
     }
 
     toString(){
-        return `Raton: [Tipo de entrada: ${this.tipoEntrada} Marca: ${this.marca} id: ${this.idRaton}]`;
+        return `Raton:\n\t\tTipo de entrada: ${this.tipoEntrada}\n\t\tMarca: ${this.marca}\n\t\tid: ${this.idRaton}`;
     }
 
 }
@@ -70,7 +70,7 @@ class Teclado extends DispositivoEntrada{
     }
 
     toString(){
-        return `Teclado: [Tipo de entrada: ${this.tipoEntrada} Marca: ${this.marca} id: ${this.idTeclado}]`;
+        return `Teclado:\n\t\tTipo de entrada: ${this.tipoEntrada}\n\t\tMarca: ${this.marca}\n\t\tid: ${this.idTeclado}`;
     }
 }
 
@@ -112,7 +112,7 @@ class Monitor{
     }
 
     toString(){
-        return `Monitor: [id: ${this.idMonitor} Marca: ${this.marca} Pulgadas: ${this.pulgadas}]`;
+        return `Monitor:\n\t\tid: ${this.idMonitor}\n\t\tMarca: ${this.marca}\n\t\tPulgadas: ${this.pulgadas}`;
     }
 }
 
@@ -171,13 +171,56 @@ class Computadora {
     }
 
     toString(){
-        return `Computadora ${this._idComputadora}:\n${this.modelo}\n${this.monitor}\n${this.raton}\n${this.teclado}`;
+        return `Computadora ${this._idComputadora}:\t${this.modelo}\n\t${this.monitor}\n\t${this.raton}\n\t${this.teclado}\n`;
     }
 }
 
-let mouse = new Raton('Control','Logitech','G203');
+class Orden {
+    
+    static contadorOrdenes = 0;
+    
+    constructor(){
+        Orden.contadorOrdenes++;
+        this._idOrden = Orden.contadorOrdenes;
+        this._computadoras = [];
+    }
+
+    get idOrden(){
+        return this._idOrden;
+    }
+
+    set idOrden(nuevaOrden){
+        this._idOrden = nuevaOrden;
+    }
+
+    get computadoras(){
+        return this._computadoras;
+    }
+
+    agregarComputadora(computadora){
+        this._computadoras.push(computadora);
+    }
+
+    mostrarOrden(){
+        console.log(`Orden: ${this.idOrden}`);
+        `${this.computadoras.forEach(computadora => console.log(computadora.toString()))}`;
+    }
+}
+
+let mouse = new Raton('Control','Logitech');
 let keyboard = new Teclado('Tipeo', 'Ajazz', 'AK33');
-let monitor = new Monitor('GW2480','BenQ', 24);
+let monitor = new Monitor('BenQ', 24);
 let pcerda = new Computadora('Armada', monitor, keyboard, mouse);
 
-console.log(pcerda.toString()); 
+
+let trackpad =  new Raton('Control','HP');
+let teclado =  new Teclado('Tipeo','HP');
+let pantalla =  new Monitor('Samsung',19);
+let laptop =  new Computadora('14cb23',pantalla,teclado,trackpad);
+
+
+let orden1 =  new Orden();
+orden1.agregarComputadora(pcerda);
+orden1.agregarComputadora(laptop);
+
+orden1.mostrarOrden();
